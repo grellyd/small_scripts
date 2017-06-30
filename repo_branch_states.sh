@@ -15,10 +15,8 @@ function parse_git_branch {
 # $1 folder name
 # $2 branch name
 function print_branch_info () {
-  # set the default branch message
-  repo=${2:-'---- Not a Git repository'}
   # pretty print folder name
-  echo -e "$DARK_BLUE$1$NO_COLOUR: $PURPLE$repo$NO_COLOUR"
+  echo -e "$DARK_BLUE$1$NO_COLOUR: $PURPLE$2$NO_COLOUR"
 }
 
 function main {
@@ -28,7 +26,11 @@ function main {
     # check is actually a directory
     test -d $dir || continue
     # run parse_git_branch in a subshell
-    ( cd $dir && print_branch_info $dir $(parse_git_branch) )
+    ( 
+    cd $dir; 
+    test -d '.git' || continue;
+    print_branch_info $dir $(parse_git_branch);
+    )
   done
 }
 main
