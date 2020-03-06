@@ -6,7 +6,7 @@ then
     change="--off"
     export MONITOR=false
 else
-    scale="0.6x0.6"
+    scale="0.7x0.7"
     change="--auto --left-of eDP1 --nograb"
     export MONITOR=true
 fi
